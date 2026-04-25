@@ -66,6 +66,6 @@ public class AuthController {
 
     userRepository.save(user);
 
-    return "registered!";
+    return "registered.";
 }
 }
