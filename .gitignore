@@ -37,3 +37,4 @@ wwwroot/
 target/
 application.properties
 test/
+docker-compose.yml
