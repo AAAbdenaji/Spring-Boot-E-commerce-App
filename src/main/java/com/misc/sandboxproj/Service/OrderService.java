@@ -1,5 +1,7 @@
 package com.misc.sandboxproj.Service;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -52,5 +54,24 @@ public class OrderService {
 
         ProdRepo.save(product);
         return OrderRepo.save(order);
+    }
+
+    public List<Order> findOrdersByUser()
+    {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+
+        User user = userDetails.getUser();
+
+        return OrderRepo.findByUserId(user.getId());
+    }
+
+    @Transactional
+    public void deleteOrderbyId(int orderid) 
+    {
+        Order o = OrderRepo.findById(orderid)
+            .orElseThrow(() -> new NotFoundException("Order Not Found"));
+        OrderRepo.delete(o);
     }
 }

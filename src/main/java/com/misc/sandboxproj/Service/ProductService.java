@@ -72,7 +72,7 @@ public class ProductService {
                 Files.createDirectories(path.getParent());
                 Files.write(path, file.getBytes());
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new ValidationException(e.getMessage());
             }
 
             Image image = new Image();
@@ -118,8 +118,7 @@ public class ProductService {
             try {
                 Files.deleteIfExists(Path.of(img.getImg_url()));
             } catch (Exception e) {
-                throw new RuntimeException(
-                    "Failed deleting image file: " + img.getImg_url(), e);
+                throw new ValidationException("Failed deleting image file: " + img.getImg_url());
             }
         }
         prodRepo.delete(product);
