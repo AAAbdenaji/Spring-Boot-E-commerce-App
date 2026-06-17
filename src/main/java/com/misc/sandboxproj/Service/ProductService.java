@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -106,6 +108,25 @@ public class ProductService {
         }
 
         return Path.of(img.getImg_url());
+    }
+
+    public ResponseEntity<byte[]> getImage(Integer prodId, Integer imageId) 
+    {
+        Path path = getImagePath(prodId, imageId);
+
+        try {
+            byte[] image = Files.readAllBytes(path);
+
+            String contentType = Files.probeContentType(path);
+
+            return ResponseEntity
+                    .ok()
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .body(image);
+
+        } catch (Exception e) {
+            throw new ValidationException("Failed to load image.");
+        }
     }
 
     @Transactional

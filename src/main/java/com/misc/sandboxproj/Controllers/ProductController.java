@@ -1,10 +1,7 @@
 package com.misc.sandboxproj.Controllers;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -69,22 +66,7 @@ public class ProductController {
             @PathVariable Integer productId,
             @PathVariable Integer imageId
     ) {
-
-        Path path = prodServ.getImagePath(productId, imageId);
-
-        try {
-            byte[] image = Files.readAllBytes(path);
-
-            String contentType = Files.probeContentType(path);
-
-            return ResponseEntity
-                    .ok()
-                    .contentType(MediaType.parseMediaType(contentType))
-                    .body(image);
-
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to load image", e);
-        }
+        return prodServ.getImage(productId, imageId);
     }
 
     @DeleteMapping("/{id}")
