@@ -4,9 +4,9 @@ A robust backend REST API built with **Spring Boot** supporting secure user auth
 
 ## Running with Docker
 
-To run the application using Docker, follow these steps:
+To run the application using Docker:
 
-1. Download the source files.
+1. Download the source code.
 2. Open your terminal in the project root directory and run:
 ```bash
 docker compose up
@@ -15,10 +15,10 @@ docker compose up
 
 ### Authentication & Authorization (`/auth`)
 
-* **Register**: Creates a new standard user account (`ROLE_USER`) with encrypted passwords.
+* **Register**: Creates a new standard user account with the (`ROLE_USER`) with encrypted passwords.
 
 
-* **Login**: Authenticates credentials and returns a secure JWT token for subsequent requests.
+* **Login**: Authenticates credentials and returns a JWT token.
 
 
 
@@ -27,16 +27,16 @@ docker compose up
 * **View Products**: Public endpoints to browse all catalog items or inspect a specific product.
 
 
-* **Product Images)**: Fetch associated image metadata or retrieve image binary content.
+* **Product Images**: Fetch associated image metadata or retrieve image binary content.
 
 
 * **Create Product**: Admin-only endpoint supporting `multipart/form-data` to upload product details alongside multiple image files.
 
 
-* **Update Product**: Admin-only endpoint to modify product attributes.
+* **Update Product**: Admin-only endpoint to modify products.
 
 
-* **Delete Product**: Admin-only endpoint that removes products and cleans up associated stored image files.
+* **Delete Product**: Admin-only endpoint that removes products and cleans up images.
 
 
 
@@ -48,5 +48,5 @@ docker compose up
 * **User Orders**: Retrieves the order history for the currently authenticated user.
 
 
-* **Delete Order**: Admin-only endpoint to remove an existing order record.
+* **Delete Order**: Admin-only endpoint to remove an existing order.
 
